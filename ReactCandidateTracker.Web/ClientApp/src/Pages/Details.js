@@ -10,13 +10,13 @@ const Details = () => {
     const history =useHistory();
     const {updateConfirmedCount, updateRefusedCount, updatePendingCount}=usePeopleCounts();
 
+    const getPendingCandidate = async () => {
+
+        const { data } = await axios.get('/api/candidatetracker/getcandidatebyid',{ params: { id: id } });
+        setCandidate(data);
+         }
+
     useEffect(() => {
-        const getPendingCandidate = async () => {
-
-            const { data } = await axios.get('/api/candidatetracker/getcandidatebyid',{ params: { id: id } });
-            setCandidate(data);
-             }
-
         getPendingCandidate();
      
     }, []);
@@ -24,13 +24,18 @@ const Details = () => {
         await axios.post('/api/candidatetracker/addconfirmed',{...candidate});
         updateConfirmedCount();
         updatePendingCount();
-        history.push('/confirmed');
+        getPendingCandidate();
+        history.push(`/pending/details/${id}`);
     }
     const onRefusedClick= async()=>{
         await axios.post('/api/candidatetracker/addrefused',{...candidate});
         updateRefusedCount();
         updatePendingCount();
         history.push('/refused');
+    }
+    const isPending=()=>{
+        console.log(candidate.status);
+            return candidate.status==="pending";
     }
     const {firstName, lastName, phoneNumber, email, notes, status} = candidate;
     return (
@@ -45,10 +50,10 @@ const Details = () => {
                           <h4>Status: {status}</h4>
                           <h4>Notes:</h4>
                           <p>{notes}</p>
-                          <div>
+                          {!!isPending() &&<div>
                          <button className="btn btn-primary" onClick={onConfirmedClick}>Confirm</button>
                          <button className="btn btn-danger" onClick={onRefusedClick}>Refuse</button>
-                        </div>
+                        </div>}
                      </div>
                   </div>
                 </div>
