@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReactCandidateTracker.Data;
 
 namespace ReactCandidateTracker.Data.Migrations
 {
     [DbContext(typeof(CandidateTrackerContext))]
-    partial class CandidateTrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20220519015627_addEnum")]
+    partial class addEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

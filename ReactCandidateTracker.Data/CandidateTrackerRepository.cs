@@ -19,37 +19,37 @@ namespace ReactCandidateTracker.Data
         public List<Candidate> GetPendingCandidates()
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            return context.Candidates.Where(c => c.Status == "pending").ToList();
+            return context.Candidates.Where(c => c.Status == Status.Pending).ToList();
         }
         public List<Candidate> GetConfirmedCandidates()
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            return context.Candidates.Where(c => c.Status == "confirmed").ToList();
+            return context.Candidates.Where(c => c.Status == Status.Confirmed).ToList();
         }
         public List<Candidate> GetRefusedCandidates()
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            return context.Candidates.Where(c => c.Status == "Refused").ToList();
+            return context.Candidates.Where(c => c.Status == Status.Refused).ToList();
         }
         public int GetPendingCount()
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            return context.Candidates.Where(c => c.Status == "pending").Count();
+            return context.Candidates.Where(c => c.Status == Status.Pending).Count();
         }
         public int GetConfirmedCount()
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            return context.Candidates.Where(c => c.Status == "Confirmed").Count();
+            return context.Candidates.Where(c => c.Status == Status.Confirmed).Count();
         }
         public int GetRefusedCount()
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            return context.Candidates.Where(c => c.Status == "refused").Count();
+            return context.Candidates.Where(c => c.Status == Status.Refused).Count();
         }
         public void AddCandidate(Candidate candidate)
         {
             using var context = new CandidateTrackerContext(_connectionString);
-            candidate.Status = "pending";
+            candidate.Status = Status.Pending;
             context.Candidates.Add(candidate);
             context.SaveChanges();
         }

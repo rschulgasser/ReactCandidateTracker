@@ -14,6 +14,7 @@ const Details = () => {
 
         const { data } = await axios.get('/api/candidatetracker/getcandidatebyid',{ params: { id: id } });
         setCandidate(data);
+        console.log(data);
          }
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const Details = () => {
     }
     const isPending=()=>{
         console.log(candidate.status);
-            return candidate.status==="pending";
+            return candidate.status==="Pending";
     }
     const {firstName, lastName, phoneNumber, email, notes, status} = candidate;
     return (

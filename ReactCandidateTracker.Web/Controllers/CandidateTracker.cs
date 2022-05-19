@@ -79,7 +79,7 @@ namespace ReactCandidateTracker.Web.Controllers
         public void AddConfirmed(Candidate candidate)
         {
             var repo = new CandidateTrackerRepository(_connectionString);
-            candidate.Status ="confirmed";
+            candidate.Status =Status.Confirmed;
             repo.UpdateCandidate(candidate);
         }
         [HttpPost]
@@ -87,7 +87,7 @@ namespace ReactCandidateTracker.Web.Controllers
         public void AddRefused(Candidate candidate)
         {
             var repo = new CandidateTrackerRepository(_connectionString);
-            candidate.Status = "refused";
+            candidate.Status = Status.Refused;
             repo.UpdateCandidate(candidate);
         }
     }
